@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ace="http://www.icefaces.org/icefaces/components"
+      xmlns:icecore="http://www.icefaces.org/icefaces/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Tema</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <ace:theme value="dark-hive"/>
+    </h:head>
+    <h:body style="background: lightgray">
+        <ace:panel id="cabecera">
+            <table style="width: 100%">
+                <tr>
+                    <td style="text-align: left; width: 75%">
+                        <h1>Inventario</h1>
+                    </td>
+                    <td style="text-align: right;">
+                        <h:form>
+                            <ace:menuBar>
+                                <ace:submenu id="menInicio" label="Menu" >
+                                    <ace:menuItem id="menuCategoria" value="Categoria" actionListener="#{menuBean.menuCategoria}"/>
+                                    <ace:menuItem id="menuProducto" value="Producto" actionListener="#{menuBean.menuProducto}"/>
+                                    <ace:menuItem id="menuTema" value="Tema" actionListener="#{menuBean.menuTema}" />
+                                </ace:submenu>
+                            </ace:menuBar>
+                        </h:form>
+                    </td>
+                </tr>
+            </table>
+        </ace:panel>
+        <br/>
+
+        <ace:panel id="themePanel" header="Selección de Tema" >
+            <h:form id="form">
+                <h:panelGrid>
+                    <ace:themeSelect value="#{themeSelectBean.theme}" label="Seleccione el nuevo tema: " labelPosition="top" >
+                        <ace:ajax render="@all"/>
+                    </ace:themeSelect>
+                </h:panelGrid>
+            </h:form>
+        </ace:panel>
+
+    </h:body>
+</html>
