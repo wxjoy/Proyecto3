@@ -15,7 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.enterprise.context.spi.Context;
 import javax.faces.application.Resource;
 import javax.faces.application.ResourceHandler;
 import javax.faces.bean.CustomScoped;

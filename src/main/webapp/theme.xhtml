@@ -45,6 +45,7 @@ and open the template in the editor.
             <h:form id="form">
                 <h:panelGrid>
                     <ace:themeSelect value="#{themeSelectBean.theme}" label="Seleccione el nuevo tema: " labelPosition="top" >
+                        <f:selectItems value="#{themeSelectBean.themeList}"/>
                         <ace:ajax render="@all"/>
                     </ace:themeSelect>
                 </h:panelGrid>
