@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ace="http://www.icefaces.org/icefaces/components"
+      xmlns:icecore="http://www.icefaces.org/icefaces/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Inventario-Registro</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <ace:theme value="dark-hive"/>
+    </h:head>
+    <h:body>
+        <ace:panel header="Registro">
+            <h:panelGrid>
+                <h:form>
+                    <h:panelGrid>
+                        <ace:textEntry required="true" id="txtUsuario" 
+                                       label="Usuario:" labelPosition="left"
+                                       value="#{registroBean.usuario}" type="email">
+                            
+                        </ace:textEntry>
+                        <ace:textEntry required="true" id="txtPassword"
+                                       label="Contraseña:" labelPosition="left"
+                                       value="#{registroBean.password}" secret="true">
+                        </ace:textEntry>
+                        <ace:pushButton id="btnRegistrar" value="Registrar" action="#{registroBean.btnRegistrar}" ></ace:pushButton>
+                    </h:panelGrid>
+                </h:form>
+            </h:panelGrid>
+        </ace:panel>
+    </h:body>
+</html>
