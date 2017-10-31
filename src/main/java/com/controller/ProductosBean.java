@@ -6,7 +6,13 @@
 package com.controller;
 
 import com.modelos.Producto;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.Serializable;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
@@ -15,6 +21,7 @@ import javax.faces.bean.CustomScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
+import javax.net.ssl.HttpsURLConnection;
 import org.icefaces.ace.event.SelectEvent;
 import org.icefaces.ace.event.UnselectEvent;
 
@@ -37,7 +44,8 @@ public class ProductosBean implements Serializable{
     private int topN;
     private Date fInicio;
     private Date fFin;
-    
+    private final String USER_AGENT = "Mozilla/5.0";
+
     public ProductosBean(){
         productos = new ArrayList<>();
         //esto es solo para prueba de visualizacion
@@ -68,7 +76,52 @@ public class ProductosBean implements Serializable{
     
     public void btnCalificar(){
         visible=false;
-        //operacion de calificar
+        //System.out.println("EL BOTON DE CALIFICAR!!!!"+ this.producto.getCodigo()+ "..."+this.producto.getPuntuacion());
+        
+        try {
+        
+            //productos.add(new Producto(0,"error",msg,0.0));
+            String url = "http://laboratoriovirtual.net:8000/api/producto/puntuar";
+		URL obj = new URL(url);
+		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+
+		//add reuqest header
+		con.setRequestMethod("POST");
+		con.setRequestProperty("User-Agent", USER_AGENT);
+		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+		String urlParameters = "codigo="+this.producto.getCodigo()+"&puntuacion="+this.producto.getPuntuacion();
+
+		// Send post request
+		con.setDoOutput(true);
+		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+		wr.writeBytes(urlParameters);
+		wr.flush();
+		wr.close();
+
+		int responseCode = con.getResponseCode();
+		System.out.println("\nSending 'POST' request to URL : " + url);
+		System.out.println("Post parameters : " + urlParameters);
+		System.out.println("Response Code : " + responseCode);
+
+		BufferedReader in = new BufferedReader(
+		        new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+
+		//print result
+		System.out.println(response.toString());
+            
+	} catch (Exception e) {
+	    System.out.println(e);
+            productos.add(new Producto(0,"error",e.toString(),0.0));
+	}
+        
     }
     
     public void btnCerrar(){
