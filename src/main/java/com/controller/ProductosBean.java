@@ -83,8 +83,7 @@ public class ProductosBean implements Serializable{
             //productos.add(new Producto(0,"error",msg,0.0));
             String url = "http://laboratoriovirtual.net:8000/api/producto/puntuar";
 		URL obj = new URL(url);
-		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
-
+		java.net.HttpURLConnection con = (java.net.HttpURLConnection) obj.openConnection();
 		//add reuqest header
 		con.setRequestMethod("POST");
 		con.setRequestProperty("User-Agent", USER_AGENT);
